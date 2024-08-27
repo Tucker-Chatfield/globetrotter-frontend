@@ -1,10 +1,11 @@
 import { useState, createContext, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import FootprintList from './components/FootprintList/FootprintList';
 import FootprintDetails from './components/FootprintDetails/FootprintDetails';
+import FootprintForm from './components/FootprintForm/FootprintForm';
 import SignupForm from './components/SignupForm/SignupForm';
 import SigninForm from './components/SigninForm/SigninForm';
 import * as footprintService from './services/footprintService';
@@ -15,6 +16,7 @@ export const AuthedUserContext = createContext(null);
 const App = () => {
   const [user, setUser] = useState(authService.getUser()); 
   const [footprints, setFootprints] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAllFootprints = async () => {
@@ -30,6 +32,12 @@ const App = () => {
     setUser(null);
   };
 
+  const handleAddFootprint = async (footprintFormData) => {
+    const newFootprint = await footprintService.create(footprintFormData);
+    setFootprints([newFootprint, ...footprints]);
+    navigate('/footprints');
+  };
+
   return (
     <>
       <AuthedUserContext.Provider value={user}>
@@ -41,6 +49,7 @@ const App = () => {
             <Route path="/" element={<Dashboard user={user} />} />
             <Route path="/footprints" element={<FootprintList footprints={footprints} />} />
             <Route path="/footprints/:footprintId" element={<FootprintDetails />} />
+            <Route path="/footprints/new" element={<FootprintForm handleAddFootprint={handleAddFootprint} />} />
             </>
           ) : (
             // Public Routes:
