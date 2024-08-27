@@ -4,6 +4,7 @@ import NavBar from './components/NavBar/NavBar';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import FootprintList from './components/FootprintList/FootprintList';
+import FootprintDetails from './components/FootprintDetails/FootprintDetails';
 import SignupForm from './components/SignupForm/SignupForm';
 import SigninForm from './components/SigninForm/SigninForm';
 import * as footprintService from './services/footprintService';
@@ -39,6 +40,7 @@ const App = () => {
             <>
             <Route path="/" element={<Dashboard user={user} />} />
             <Route path="/footprints" element={<FootprintList footprints={footprints} />} />
+            <Route path="/footprints/:footprintId" element={<FootprintDetails />} />
             </>
           ) : (
             // Public Routes:
