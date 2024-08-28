@@ -68,4 +68,20 @@ const deleteFootprint = async (footprintId) => {
   }
 };
 
-export { index, show, create, createComment, deleteFootprint };
+async function update(footprintId, footprintFormData) {
+  try {
+    const res = await fetch(`${BASE_URL}/${footprintId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(footprintFormData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { index, show, create, createComment, deleteFootprint, update };

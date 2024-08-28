@@ -44,6 +44,12 @@ const App = () => {
     navigate('/footprints');
   };
 
+  const handleUpdateFootprint = async (footprintId, footprintFormData) => {
+    const updatedFootprint = await footprintService.update(footprintId, footprintFormData);
+    setFootprints(footprints.map((footprint) => (footprintId === footprint._id ? updatedFootprint : footprint)));
+    navigate(`/footprints/${footprintId}`);
+  };
+
   return (
     <>
       <AuthedUserContext.Provider value={user}>
@@ -56,6 +62,7 @@ const App = () => {
             <Route path="/footprints" element={<FootprintList footprints={footprints} />} />
             <Route path="/footprints/:footprintId" element={<FootprintDetails handleDeleteFootprint={handleDeleteFootprint} />} />
             <Route path="/footprints/new" element={<FootprintForm handleAddFootprint={handleAddFootprint} />} />
+            <Route path="/footprints/:footprintId/edit" element={<FootprintForm handleUpdateFootprint={handleUpdateFootprint} />} />
             </>
           ) : (
             // Public Routes:

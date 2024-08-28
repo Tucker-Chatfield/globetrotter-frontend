@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import * as footprintService from '../../services/footprintService';
 
 const FootprintForm = (props) => {
   const [formData, setFormData] = useState({
@@ -6,18 +8,33 @@ const FootprintForm = (props) => {
     text: '',
   });
 
+  const { footprintId } = useParams();
+
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    props.handleAddFootprint(formData);
+    if (footprintId) {
+      props.handleUpdateFootprint(footprintId, formData);
+    } else {
+      props.handleAddFootprint(formData);
+    }
   };
+
+  useEffect(() => {
+    const fetchFootprint = async () => {
+      const footprintData = await footprintService.show(footprintId);
+      setFormData(footprintData);
+    };
+    if (footprintId) fetchFootprint();
+  }, [footprintId]);
 
   return (
     <main>
       <form onSubmit={handleSubmit}>
+        <h1>{footprintId ? 'Edit Footprint' : 'New Footprint'}</h1>
         <label htmlFor='title-input'>Title</label>
         <input 
           required

@@ -1,6 +1,6 @@
 import { AuthedUserContext } from '../../App';
 import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import * as footprintService from '../../services/footprintService';
 import CommentForm from '../CommentForm/CommentForm';
 
@@ -25,6 +25,15 @@ const FootprintDetails = (props) => {
     const newComment = await footprintService.createComment(footprintId, commentFormData);
     setFootprints({ ...footprint, comments: [...footprint.comments, newComment] });
   };
+
+  const handleDeleteComment = async (commentId) => {
+    console.log('commentId:', commentId);
+    await footprintService.deleteComment(footprintId, commentId);
+    setFootprint({
+      ...footprint,
+      comments: footprint.comments.filter((comment) => comment._id !== commentId),
+    });
+  };
   
   if (!footprint) return <main>Loading...</main>;
 
@@ -38,6 +47,7 @@ const FootprintDetails = (props) => {
       </p>
       {footprint.author._id === user._id && (
         <>
+          <Link to={`/footprints/${footprintId}/edit`}>Edit</Link>
           <button onClick={() => props.handleDeleteFootprint(footprintId)}>Delete</button>
         </>
       )}
@@ -55,6 +65,12 @@ const FootprintDetails = (props) => {
               {comment.author.username} posted on
               {new Date(comment.createdAt).toLocaleDateString()}
             </p>
+            {comment.author._id === user._id && (
+              <>
+                <Link to={`/footprints/${footprintId}/comments/${comment._id}/edit`}>Edit</Link>
+                <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
+              </>
+            )}
           </header>
           <p>{comment.text}</p>
         </article>
