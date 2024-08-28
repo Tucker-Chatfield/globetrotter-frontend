@@ -54,4 +54,18 @@ const createComment = async (footprintId, commentFormData) => {
   }
 };
 
-export { index, show, create, createComment };
+const deleteFootprint = async (footprintId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${footprintId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { index, show, create, createComment, deleteFootprint };

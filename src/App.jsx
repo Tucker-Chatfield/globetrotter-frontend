@@ -38,6 +38,12 @@ const App = () => {
     navigate('/footprints');
   };
 
+  const handleDeleteFootprint = async (footprintId) => {
+    const deletedFootprint = await footprintService.deleteFootprint(footprintId);
+    setFootprints(footprints.filter((footprint) => footprint._id !== deletedFootprint._id));
+    navigate('/footprints');
+  };
+
   return (
     <>
       <AuthedUserContext.Provider value={user}>
@@ -48,7 +54,7 @@ const App = () => {
             <>
             <Route path="/" element={<Dashboard user={user} />} />
             <Route path="/footprints" element={<FootprintList footprints={footprints} />} />
-            <Route path="/footprints/:footprintId" element={<FootprintDetails />} />
+            <Route path="/footprints/:footprintId" element={<FootprintDetails handleDeleteFootprint={handleDeleteFootprint} />} />
             <Route path="/footprints/new" element={<FootprintForm handleAddFootprint={handleAddFootprint} />} />
             </>
           ) : (

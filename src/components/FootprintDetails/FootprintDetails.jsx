@@ -1,5 +1,6 @@
+import { AuthedUserContext } from '../../App';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import * as footprintService from '../../services/footprintService';
 import CommentForm from '../CommentForm/CommentForm';
 
@@ -7,6 +8,7 @@ import CommentForm from '../CommentForm/CommentForm';
 const FootprintDetails = (props) => {
   const { footprintId } = useParams();
   const [footprint, setFootprints] = useState(null);
+  const user = useContext(AuthedUserContext);
   console.log('footprintId', footprintId);
 
   useEffect(() => {
@@ -34,6 +36,11 @@ const FootprintDetails = (props) => {
         {footprint.author.username} posted on
         {new Date(footprint.createdAt).toLocaleDateString()}
       </p>
+      {footprint.author._id === user._id && (
+        <>
+          <button onClick={() => props.handleDeleteFootprint(footprintId)}>Delete</button>
+        </>
+      )}
     </header>
     <p>{footprint.text}</p>
     <section>
