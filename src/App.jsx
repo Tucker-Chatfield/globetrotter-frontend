@@ -2,7 +2,6 @@ import { useState, createContext, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Landing from './components/Landing/Landing';
-import Dashboard from './components/Dashboard/Dashboard';
 import FootprintList from './components/FootprintList/FootprintList';
 import FootprintDetails from './components/FootprintDetails/FootprintDetails';
 import FootprintForm from './components/FootprintForm/FootprintForm';
@@ -59,7 +58,7 @@ const App = () => {
           {user ? (
             // Protected Routes:
             <>
-            <Route path="/" element={<Dashboard user={user} />} />
+            <Route path="/" element={<Landing />} />
             <Route path="/footprints" element={<FootprintList footprints={footprints} />} />
             <Route path="/footprints/:footprintId" element={<FootprintDetails handleDeleteFootprint={handleDeleteFootprint} />} />
             <Route path="/footprints/new" element={<FootprintForm handleAddFootprint={handleAddFootprint} />} />

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as footprintService from '../../services/footprintService';
+import styles from './FootprintForm.module.css';
 
 const FootprintForm = (props) => {
   const [formData, setFormData] = useState({
@@ -32,7 +33,7 @@ const FootprintForm = (props) => {
   }, [footprintId]);
 
   return (
-    <main>
+    <main className={styles.container}>
       <form onSubmit={handleSubmit}>
         <h1>{footprintId ? 'Edit Footprint' : 'New Footprint'}</h1>
         <label htmlFor='title-input'>Title</label>
