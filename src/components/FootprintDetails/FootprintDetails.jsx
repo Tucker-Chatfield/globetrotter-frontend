@@ -59,12 +59,13 @@ const FootprintDetails = (props) => {
 
       {footprint.comments.map((comment) => (
         <article key={comment._id}>
+        {console.log('Rendering Buttons: ', String(comment.author) === String(user._id))}
           <header>
             <p>
               {comment.author.username} posted on
               {new Date(comment.createdAt).toLocaleDateString()}
             </p>
-            {comment.author._id === user._id && (
+            {comment.author && comment.author._id && String(comment.author._id) === String(user._id) && (
               <>
                 <Link to={`/footprints/${footprintId}/comments/${comment._id}/edit`}>Edit</Link>
                 <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>

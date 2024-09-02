@@ -1,10 +1,11 @@
-import { Navigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as footprintService from '../../services/footprintService';
 
 const CommentForm = (props) => {
   const [formData, setFormData] = useState({ text: '' });
   const { footprintId, commentId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFootprint = async () => {
@@ -22,7 +23,7 @@ const CommentForm = (props) => {
     evt.preventDefault();
     if (footprintId && commentId) {
       footprintService.updateComment(footprintId, commentId, formData);
-      Navigate(`/footprints/${footprintId}`);
+      navigate(`/footprints/${footprintId}`);
     } else {
       props.handleAddComment(formData);
     }
