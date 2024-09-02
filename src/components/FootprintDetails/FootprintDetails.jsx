@@ -9,7 +9,6 @@ const FootprintDetails = (props) => {
   const { footprintId } = useParams();
   const [footprint, setFootprints] = useState(null);
   const user = useContext(AuthedUserContext);
-  console.log('footprintId', footprintId);
 
   useEffect(() => {
     const fetchFootprint = async () => {
@@ -29,7 +28,7 @@ const FootprintDetails = (props) => {
   const handleDeleteComment = async (commentId) => {
     console.log('commentId:', commentId);
     await footprintService.deleteComment(footprintId, commentId);
-    setFootprint({
+    setFootprints({
       ...footprint,
       comments: footprint.comments.filter((comment) => comment._id !== commentId),
     });

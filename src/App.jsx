@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import FootprintList from './components/FootprintList/FootprintList';
 import FootprintDetails from './components/FootprintDetails/FootprintDetails';
 import FootprintForm from './components/FootprintForm/FootprintForm';
+import CommentForm from './components/CommentForm/CommentForm';
 import SignupForm from './components/SignupForm/SignupForm';
 import SigninForm from './components/SigninForm/SigninForm';
 import * as footprintService from './services/footprintService';
@@ -63,6 +64,7 @@ const App = () => {
             <Route path="/footprints/:footprintId" element={<FootprintDetails handleDeleteFootprint={handleDeleteFootprint} />} />
             <Route path="/footprints/new" element={<FootprintForm handleAddFootprint={handleAddFootprint} />} />
             <Route path="/footprints/:footprintId/edit" element={<FootprintForm handleUpdateFootprint={handleUpdateFootprint} />} />
+            <Route path="/footprints/:footprintId/comments/:commentId/edit" element={<CommentForm />} />
             </>
           ) : (
             // Public Routes:

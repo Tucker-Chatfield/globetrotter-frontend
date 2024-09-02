@@ -84,4 +84,20 @@ async function update(footprintId, footprintFormData) {
   }
 }
 
-export { index, show, create, createComment, deleteFootprint, update };
+const updateComment = async (footprintId, commentId, commentFormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${footprintId}/comments/${commentId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(commentFormData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { index, show, create, createComment, deleteFootprint, update, updateComment };
