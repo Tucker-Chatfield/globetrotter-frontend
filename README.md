@@ -6,7 +6,7 @@
 
 Welcome to Globetrotter, your ultimate social media platform for sharing and discovering travel experiences from around the world. We believe that every journey is an adventure worth sharing, and Globetrotter is here to help you connect with fellow travelers, inspire others with your stories, and explore the world through the eyes of our vibrant community.
 
-[CLICK TO DEMO]()
+[CLICK TO DEMO](https://globetrotter-frontend.netlify.app)
 
 ## :camera_flash: Screenshots
 
@@ -24,7 +24,7 @@ Welcome to Globetrotter, your ultimate social media platform for sharing and dis
 
 Here's how to get started with Globetrotter:
 
-1. Visit the [Globetrotter website]().
+1. Visit the [Globetrotter website](https://globetrotter-frontend.netlify.app).
 2. Sign up for an account or log in if you already have one.
 3. Once logged in, you'll be able to see the option to view or create Footprints.
 4. To create a Footprint:
