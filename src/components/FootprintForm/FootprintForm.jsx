@@ -7,6 +7,7 @@ const FootprintForm = (props) => {
   const [formData, setFormData] = useState({
     title: '',
     text: '',
+    image: null
   });
 
   const { footprintId } = useParams();
