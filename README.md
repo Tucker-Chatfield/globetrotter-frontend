@@ -6,7 +6,7 @@
 
 Welcome to Globetrotter, your ultimate social media platform for sharing and discovering travel experiences from around the world. We believe that every journey is an adventure worth sharing, and Globetrotter is here to help you connect with fellow travelers, inspire others with your stories, and explore the world through the eyes of our vibrant community.
 
-[CLICK TO DEMO]([https://globetrotter-frontend.netlify.app](https://globetrotter-project.netlify.app))
+[CLICK TO DEMO](https://globetrotter-project.netlify.app)
 
 ## :camera_flash: Screenshots
 
